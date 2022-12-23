@@ -10,6 +10,13 @@
         contents = {
           user = {
             email = "dev@hjdskes.nl";
+            signingkey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCr0rair5PziFCPOAquZuTGs2XXNxozn160FBxK2uSN8vkOhjYLsqatJq7CYLHu9hvhEI7Lnz4ummyZA3jIqMB/3lW0GwnPpWHy71Mf8zyRhw3tZe6M1sg8nPH13uQl2ACpWuGqSe8Wb2RnmcQwRoGK2pVTiG2T1yig5I5zgIIlbkCBco6qVsLQb35u3fmrBSIZaucr4VpgnxbRj2fNmvqbaaGtLgJ5bTn+Us/+/uMfTZ8O362QaVVPURtuh55K+kfuTND2PW9vRYwmvTUZeXyYpuZE1XKRm9wrj7P6716Oko7IikPp9qY5Wqe0+FDarper4zCQ2ojENEF0u76QwfOF";
+          };
+          commit = {
+            gpgSign = true;
+          };
+          gpg = {
+            format = "ssh";
           };
         };
       }
