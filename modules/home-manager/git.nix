@@ -1,9 +1,20 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.git = {
     enable = true;
     aliases = {
       wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/head";
     };
+    includes = [
+      {
+        condition = "gitdir:~/src/";
+        contents = {
+          user = {
+            name = "Jente Hidskes Ankarberg";
+            email = "dev@hjdskes.nl";
+          };
+        };
+      }
+    ];
     extraConfig = {
       core = {
         editor = "nvim";
@@ -27,7 +38,7 @@
       init = { defaultBranch = "main"; };
       fetch = { prune = true; };
       merge = {
-        conflictStyle = zdiff3;
+        conflictStyle = "zdiff3";
       };
       aliases = {
         fix = "commit --amend --no-edit";

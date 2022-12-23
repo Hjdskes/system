@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./bash.nix
-    # ./git.nix
+    ./git.nix
     ./readline.nix
     # ./ssh.nix
   ];
