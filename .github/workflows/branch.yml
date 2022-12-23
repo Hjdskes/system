@@ -1,0 +1,27 @@
+name: "Branch build"
+
+on: [ push ]
+
+jobs:
+  format:
+    name: Check code formatting
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v18
+      - name: Check formatting
+        run: nix fmt -- --fail-on-change
+  
+  checks:
+    name: Run Nix checks
+    needs: format
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v18
+      - name: Run Nix checks
+        run: nix flake check
