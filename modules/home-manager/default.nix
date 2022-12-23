@@ -40,5 +40,7 @@
       # Let Home Manager install and manage itself.
       enable = true;
     };
+
+    dircolors.enable = true;
   };
 }
