@@ -2,6 +2,7 @@
   programs.git = {
     enable = true;
     aliases = {
+      fix = "commit --amend --no-edit";
       wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/head";
     };
     includes = [
@@ -48,9 +49,6 @@
       fetch = { prune = true; };
       merge = {
         conflictStyle = "zdiff3";
-      };
-      aliases = {
-        fix = "commit --amend --no-edit";
       };
       # TODO: go over colors: https://git-scm.com/docs/git-config
       color.branch = {
