@@ -9,13 +9,15 @@
         condition = "gitdir:~/src/";
         contents = {
           user = {
-            name = "Jente Hidskes Ankarberg";
             email = "dev@hjdskes.nl";
           };
         };
       }
     ];
     extraConfig = {
+      user = {
+        name = "Jente Hidskes Ankarberg";
+      };
       core = {
         editor = "nvim";
         whitespace = "fix,-indent-with-non-tab,trailing-space,cr-at-eol";
