@@ -58,11 +58,13 @@
 
     shellOptions = [ "histappend" "checkwinsize" "no_empty_cmd_completion" ];
 
+    # TODO: refer to nix pkgs? E.g. ${pkgs.coreutils}/bin/ls...
     shellAliases = {
       df = "df -h";
       diff = "colordiff -up";
       du = "du -h";
       free = "free -m";
+      grep = "grep --color=auto -d skip";
       ls = "ls -G";
       mkdir = "mkdir -p -v";
       ".." = "cd ..";
