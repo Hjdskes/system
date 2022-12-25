@@ -4,6 +4,7 @@
     ./git.nix
     ./readline.nix
     # ./ssh.nix
+    ./vscode.nix
   ];
 
   nixpkgs.config = { allowUnfree = true; };
