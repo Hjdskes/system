@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./bash.nix
+    ./bash
     ./git.nix
     ./readline.nix
     # ./ssh.nix
