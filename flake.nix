@@ -1,6 +1,15 @@
 {
   description = "My Nixified system configurations";
 
+  nixConfig = {
+    substituters = [ "https://cache.nixos.org" "https://hjdskes.cachix.org" ];
+
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "hjdskes.cachix.org-1:myagc5XavzRr97YDozKzS8PajQCT9I1z3p6zsvsRtMY="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixos-22.11;
     utils.url = github:numtide/flake-utils;
