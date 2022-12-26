@@ -1,6 +1,7 @@
 # Nix system configuration
 
-![Branch build for main](https://github.com/hjdskes/system/actions/workflows/branch.yml/badge.svg?branch=main)
+![Branch build for main](https://github.com/hjdskes/system/actions/workflows/branch.yml/badge.svg?branch=main) ![Cachix cache](https://github.com/hjdskes/system/actions/workflows/cachix.yml/badge.svg)
+
 
 This repository manages system configurations for all of my Linux, (soon) NixOS and (soon) macOS machines.
 It is based on [kclejeune's system repository](https://github.com/kclejeune/system).
