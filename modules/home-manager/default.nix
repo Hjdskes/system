@@ -7,7 +7,11 @@
     ./vscode.nix
   ];
 
-  nixpkgs.config = { allowUnfree = true; };
+  nixpkgs.config = {
+    allowUnfree = true;
+    # Workaround for https://github.com/nix-community/home-manager/issues/2942
+    allowUnfreePredicate = (_: true);
+  };
 
   home = {
     # This value determines the Home Manager release that your
