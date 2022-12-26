@@ -36,11 +36,8 @@
   };
 
   programs = {
-    home-manager = {
-      # Let Home Manager install and manage itself.
-      enable = true;
-    };
-
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
     dircolors.enable = true;
   };
 }
