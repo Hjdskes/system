@@ -36,6 +36,9 @@
       gnugrep
       gnused
       jq
+      nodePackages.bash-language-server
+      nodePackages.yaml-language-server
+      rnix-lsp
       tree
     ];
   };

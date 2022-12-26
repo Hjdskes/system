@@ -108,8 +108,10 @@
         in
         {
           default = pkgs.mkShell {
-            packages = [
+            packages = with pkgs; [
               (treefmt pkgs)
+              # nixpkgs-fmt
+              rnix-lsp
             ];
           };
         });
