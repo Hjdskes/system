@@ -3,7 +3,7 @@
 ![Branch build for main](https://github.com/hjdskes/system/actions/workflows/branch.yml/badge.svg?branch=main) ![Cachix cache](https://github.com/hjdskes/system/actions/workflows/cachix.yml/badge.svg)
 
 
-This repository manages system configurations for all of my Linux, (soon) NixOS and (soon) macOS machines.
+This repository manages system configurations for all of my Linux, (soon) NixOS and macOS machines.
 It is based on [kclejeune's system repository](https://github.com/kclejeune/system).
 
 ## Structure
@@ -24,47 +24,47 @@ This means that all of its modules are found in [./modules/home-manager](./modul
 These modules are imported into all other configurations in the common module similarly to this:
 
 ```nix
-{ config, pkgs, ... }: {
-  home-manager.users.jente = import ./home-manager/home.nix;
+{ ... }: {
+  home-manager.users.jente = import ./home-manager;
 }
 ```
 
 This means that [./modules/home-manager/default.nix](./modules/home-manager/default.nix) is fully compatible as a standalone configuration, managed with the `home-manager` CLI.
 This allows close replication of any user config for any system running Nix. These configurations are defined in the `homeConfigurations` output.
 
-## Installing a Configuration
-
-### Non-NixOS prerequisite: install Nix
-
-Nix has to be installed on your system. You can follow the official installation guidelines for [Linux](https://nixos.org/download.html#nix-install-linux) and [macOS](https://nixos.org/download.html#nix-install-macos).
-
-Note that this step is naturally skipped on NixOS since `nix` is the package manager by default.
-
-## System bootstrapping
+## Installing a configuration
 
 ### NixOS
 
-Follow the installation instructions, then run
+Follow the NixOS installation instructions, then run
 
 ```bash
 sudo nixos-install --flake github:hjdskes/system#jente@x86_64-linux
 ```
 
-### macOS/Linux
-
-Clone this repository into `~/.nixpkgs` with
+or, if you cloned the repository to your filesystem,
 
 ```bash
-git clone https://github.com/hjdskes/system ~/.nixpkgs
+sudo nixos-install --flake .#jente@x86_64-linux
 ```
 
-You can bootstrap a new nix-darwin system using
+### macOS with nix-darwin
+
+Install [nix for macOS](https://nixos.org/download.html#nix-install-macos) and [nix-darwin](https://github.com/LnL7/nix-darwin#install) using their linked installation instructions, then run
+
+```bash
+darwin-rebuild switch --flake github:hjdskes/system#jente@aarch64-darwin`
+```
+
+or, if you cloned the repository to your filesystem,
 
 ```bash
 darwin-rebuild switch --flake .#jente@aarch64-darwin
 ```
 
-or a home-manager configuration using
+### Standalone home-manager
+
+First make sure that nix is installed (installation instructions for [Linux](https://nixos.org/download.html#nix-install-linux) & [macOS](https://nixos.org/download.html#nix-install-macos)). Now you can use the standalone home-manager configuration using
 
 ```bash
 home-manager switch --flake .#jente@x86_64-linux
