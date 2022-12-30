@@ -17,7 +17,11 @@ jobs:
   checks:
     name: Run Nix checks
     needs: format
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        # TODO: add aarch64-darwin option when available.
+        os: [ "ubuntu-22.04" ]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
