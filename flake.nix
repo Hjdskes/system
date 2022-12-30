@@ -18,13 +18,34 @@
       url = github:nix-community/home-manager/release-22.11;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, treefmt-nix, utils, home-manager, ... }:
+  outputs = { self, nixpkgs, treefmt-nix, utils, home-manager, darwin, ... }:
     let
       inherit (utils.lib) eachSystemMap;
-      defaultSystems = [ "x86_64-linux" ];
+      defaultSystems = [ "aarch64-darwin" "x86_64-linux" ];
       treefmt = pkgs: treefmt-nix.lib.mkWrapper pkgs (import ./treefmt.nix);
+      isDarwin = system: builtins.elem system nixpkgs.lib.platforms.darwin;
+      homePrefix = system: if isDarwin system then "/Users" else "/home";
+
+      # Generate a Darwin configuration.
+      mkDarwinConfig =
+        { system ? "aarch64-darwin"
+        , baseModules ? [
+            ./modules/darwin
+            home-manager.darwinModules.home-manager
+          ]
+        , extraModules ? [ ]
+        ,
+        }:
+        darwin.lib.darwinSystem {
+          inherit system;
+          modules = baseModules ++ extraModules;
+        };
 
       # Generate a home-manager configuration usable on any Unix system.
       mkHomeConfig =
@@ -35,7 +56,7 @@
             {
               home = {
                 inherit username;
-                homeDirectory = "/home/${username}";
+                homeDirectory = "${homePrefix system}/${username}";
               };
             }
           ]
@@ -43,7 +64,6 @@
         }:
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = import nixpkgs { inherit system; };
-          extraSpecialArgs = { inherit nixpkgs; };
           modules = baseModules ++ extraModules;
         };
 
@@ -56,14 +76,28 @@
             "home-manager-${username}" =
               self.homeConfigurations."${username}@${system}".activationPackage;
             devShell = self.devShells."${system}".default;
-          };
+          } // (nixpkgs.lib.optionalAttrs (isDarwin system) {
+            # TODO: just add this to the attrset when NixOS support is in
+            "${system}-${username}" =
+              self.darwinConfigurations."${username}@${system}".config.system.build.toplevel;
+          });
         };
     in
     {
       homeConfigurations = {
+        "jente@aarch64-darwin" = mkHomeConfig {
+          username = "jente";
+          system = "aarch64-darwin";
+        };
         "jente@x86_64-linux" = mkHomeConfig {
           username = "jente";
           system = "x86_64-linux";
+        };
+      };
+
+      darwinConfigurations = {
+        "jente@aarch64-darwin" = mkDarwinConfig {
+          system = "aarch64-darwin";
         };
       };
 
@@ -79,7 +113,9 @@
           };
         });
 
-      checks = { } // mkCheck { system = "x86_64-linux"; username = "jente"; };
+      checks = { }
+        // mkCheck { system = "aarch64-darwin"; username = "jente"; }
+        // mkCheck { system = "x86_64-linux"; username = "jente"; };
 
       formatter = eachSystemMap defaultSystems (
         system: (treefmt (import nixpkgs { inherit system; }))

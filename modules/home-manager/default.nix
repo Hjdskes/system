@@ -31,6 +31,10 @@
 
     packages = with pkgs; [
       colordiff
+      coreutils-full
+      gnugrep
+      gnused
+      jq
       tree
     ];
   };
