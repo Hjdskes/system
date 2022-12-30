@@ -48,14 +48,12 @@ function upto() {
     return
   fi
   local upto=$1
-  cd "''${PWD/\/''$upto\/*//''$upto}" || exit
+  cd "${PWD/\/$upto\/*//$upto}" || exit
 }
 
 function _upto() {
-  local cur=''${COMP_WORDS[COMP_CWORD]}
-  local d=''${PWD//\//\ }
-  # COMPREPLY=( $( compgen -W "$d" -- "$cur" ) )
-  # TODO: this won't work on Mac OS default Bash.
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  local d=${PWD//\//\ }
   mapfile -t COMPREPLY < <(compgen -W "$d" -- "$cur")
 }
 
