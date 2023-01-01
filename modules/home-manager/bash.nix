@@ -56,14 +56,6 @@
       fi
     '';
 
-    profileExtra = ''
-      if [[ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
-        source "$HOME/.nix-profile/etc/profile.d/nix.sh"
-      else
-        echo "Can't source Nix profile; you're on your own."
-      fi
-    '';
-
     shellOptions = [ "histappend" "checkwinsize" "no_empty_cmd_completion" ];
 
     shellAliases = {
