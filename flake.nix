@@ -98,6 +98,7 @@
       darwinConfigurations = {
         "jente@aarch64-darwin" = mkDarwinConfig {
           system = "aarch64-darwin";
+          extraModules = [ ./profiles/griffin.nix ];
         };
       };
 
