@@ -1,7 +1,10 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    iterm2
-  ];
+  # TODO: applications installed through Nix are not findable
+  # through Spotlight. For now, use Homebrew to install them
+  # and work around this.
+  # environment.systemPackages = with pkgs; [
+  #   iterm2
+  # ];
 
   # For applications that aren't available in nixpkgs,
   # or not available for aarch64-darwin.
@@ -9,6 +12,7 @@
   homebrew = {
     enable = true;
     casks = [
+      "iterm2"
       "spotify"
     ];
   };
