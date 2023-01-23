@@ -7,6 +7,22 @@
     };
     includes = [
       {
+        condition = "gitdir:~/griffin/";
+        contents =
+          {
+            user = {
+              email = "jente@griffin.sh";
+              signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJu8RqWEKSTl/hC9d0c1+c3I8LjXFk8+hm9QAK0a5Iei griffin";
+            };
+            commit = {
+              gpgSign = true;
+            };
+            gpg = {
+              format = "ssh";
+            };
+          };
+      }
+      {
         condition = "gitdir:~/src/";
         contents = {
           user = {
