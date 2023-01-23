@@ -62,6 +62,8 @@ or, if you cloned the repository to your filesystem,
 darwin-rebuild switch --flake .#jente@aarch64-darwin
 ```
 
+Note that some applications are installed with Homebrew, which needs to be [installed manually first](https://brew.sh).
+
 ### Standalone home-manager
 
 First make sure that nix is installed (installation instructions for [Linux](https://nixos.org/download.html#nix-install-linux) & [macOS](https://nixos.org/download.html#nix-install-macos)). Now you can use the standalone home-manager configuration using
