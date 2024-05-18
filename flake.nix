@@ -7,7 +7,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager }:
     let
       isDarwin = system: builtins.elem system nixpkgs.lib.platforms.darwin;
       homePrefix = system: if isDarwin system then "/Users" else "/home";
@@ -34,5 +34,19 @@
           system = "aarch64-darwin";
         };
       };
+
+      checks = with nixpkgs.lib;
+        trivial.pipe self.homeConfigurations [
+          # [{ name, homeConfiguration }] => [{ system, name, value = activationPackage; }]
+          (mapAttrsToList (name: home: {
+            system = home.activationPackage.stdenv.system;
+            inherit name;
+            value = home.activationPackage;
+          }))
+          # [{ system, name, value }] => {system = [{ system, name, value }]}
+          (groupBy (systemNameValue: systemNameValue.system))
+          # { system = [{ system, name, value }]} => { system.name = activationPackage }
+          (mapAttrs (system: nameValuePairs: listToAttrs nameValuePairs))
+        ];
     };
 }
