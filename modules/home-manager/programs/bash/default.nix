@@ -1,7 +1,13 @@
 { pkgs, ... }: {
   programs.bash = {
     enable = true;
-    bashrcExtra = "";
+    # TODO: https://github.com/nix-community/home-manager/issues/3133
+    enableCompletion = false;
+    bashrcExtra = ''
+      if [[ -z BASH_COMPLETION_VERSINFO ]]; then
+        . "${pkgs.bash-completion}/etc/profile.d/bash_completion.sh"
+      fi
+    '';
     historyControl = [ "ignoredups" "ignorespace" "erasedups" ];
     initExtra = ''
       if [[ -r ${pkgs.git}/share/bash-completion/completions/git ]]; then
