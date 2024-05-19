@@ -29,8 +29,12 @@
       gnused
       iterm2 # TODO: configure
       jq
+      marksman
+      nodePackages.bash-language-server
+      nodePackages.vscode-json-languageserver
       spotify
       tree
+      yaml-language-server
     ];
 
     # Extra directories to add to PATH.
