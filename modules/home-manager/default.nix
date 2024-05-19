@@ -33,6 +33,7 @@
       nodePackages.bash-language-server
       nodePackages.vscode-json-languageserver
       spotify
+      telegram-desktop
       tree
       yaml-language-server
     ];
