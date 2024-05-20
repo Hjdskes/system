@@ -16,12 +16,18 @@
         devShells.default = with pkgs; mkShellNoCC { packages = [ nil ]; };
         checks = lib.mkHomeChecks system // lib.mkShellChecks system;
       }) // {
+        homeModules = import ./home-manager/variants.nix;
+
         homeConfigurations = {
-          "jente@air" = lib.mkHomeConfig {
-            username = "jente";
-            system = "aarch64-darwin";
+          default = home-manager.lib.homeManagerConfiguration {
+            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+            modules = [ self.homeModules.default ];
+          };
+
+          griffin = home-manager.lib.homeManagerConfiguration {
+            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+            modules = [ self.homeModules.griffin ];
           };
         };
       };
-
 }

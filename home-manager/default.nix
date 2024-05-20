@@ -8,7 +8,11 @@
 
   nixpkgs.config = { allowUnfree = true; };
 
-  home = {
+  home = rec {
+    username = "jente";
+    homeDirectory =
+      if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
+
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards
@@ -24,6 +28,7 @@
     packages = with pkgs; [
       colordiff
       coreutils-full
+      discord
       git
       gnugrep
       gnused
