@@ -2,7 +2,7 @@
   programs.helix = {
     enable = true;
     settings = {
-      theme = "autumn";
+      theme = "solarized_light";
       editor = {
         bufferline = "multiple";
         cursor-shape = {
