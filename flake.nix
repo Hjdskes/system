@@ -6,9 +6,14 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager }@inputs:
+  outputs = { self, nixpkgs, flake-utils, home-manager, mac-app-util }@inputs:
     let lib = import ./lib inputs;
     in flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
@@ -21,12 +26,18 @@
         homeConfigurations = {
           default = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            modules = [ self.homeModules.default ];
+            modules = [
+              self.homeModules.default
+              mac-app-util.homeManagerModules.default
+            ];
           };
 
           griffin = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            modules = [ self.homeModules.griffin ];
+            modules = [
+              self.homeModules.griffin
+              mac-app-util.homeManagerModules.default
+            ];
           };
         };
       };
