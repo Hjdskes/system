@@ -5,6 +5,7 @@
     ./programs/helix.nix
     ./programs/iterm2
     ./programs/readline.nix
+    ./programs/vscode.nix
   ];
 
   nixpkgs.config = { allowUnfree = true; };
