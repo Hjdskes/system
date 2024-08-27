@@ -1,8 +1,9 @@
 { pkgs, ... }: {
   imports = [
     ./programs/bash
-    ./programs/helix.nix
     ./programs/git.nix
+    ./programs/helix.nix
+    ./programs/iterm2
     ./programs/readline.nix
   ];
 
@@ -32,7 +33,6 @@
       git
       gnugrep
       gnused
-      iterm2 # TODO: configure
       jq
       marksman
       nodePackages.bash-language-server
@@ -51,7 +51,6 @@
       EDITOR = "hx";
       PAGER = "less";
     };
-
   };
 
   programs = {
