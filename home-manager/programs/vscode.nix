@@ -8,7 +8,6 @@
       betterthantomorrow.calva
       brettm12345.nixfmt-vscode
       github.github-vscode-theme
-      piousdeer.adwaita-theme
       timonwong.shellcheck
     ];
     userSettings = {
@@ -33,9 +32,9 @@
       "window.autoDetectColorScheme" = true;
       "window.commandCenter" = true;
       "window.titleBarStyle" = "custom";
-      "workbench.preferredDarkColorTheme" = "Adwaita Dark";
-      "workbench.preferredLightColorTheme" = "Adwaita Light";
-      "workbench.productIconTheme" = "adwaita";
+      "workbench.preferredDarkColorTheme" = "GitHub Dark";
+      "workbench.preferredLightColorTheme" = "GitHub Light";
+      "workbench.productIconTheme" = "Default";
       "workbench.enableExperiments" = false;
       "workbench.iconTheme" = "vs-seti";
       "workbench.tips.enabled" = false;
