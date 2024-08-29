@@ -21,23 +21,17 @@
         devShells.default = with pkgs; mkShellNoCC { packages = [ nil ]; };
         checks = lib.mkHomeChecks system // lib.mkShellChecks system;
       }) // {
-        homeModules = import ./home-manager/variants.nix;
+        homeModules = import ./home-manager/variants.nix inputs;
 
         homeConfigurations = {
-          default = home-manager.lib.homeManagerConfiguration {
+          mac = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            modules = [
-              self.homeModules.default
-              mac-app-util.homeManagerModules.default
-            ];
+            modules = [ self.homeModules.mac ];
           };
 
           griffin = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            modules = [
-              self.homeModules.griffin
-              mac-app-util.homeManagerModules.default
-            ];
+            modules = [ self.homeModules.griffin ];
           };
         };
       };
