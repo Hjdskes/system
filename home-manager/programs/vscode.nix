@@ -14,7 +14,7 @@
       "editor.bracketPairColorization.enabled" = false;
       "editor.formatOnPaste" = true;
       "editor.formatOnSave" = true;
-      "editor.lightbulb.enabled" = false;
+      "editor.lightbulb.enabled" = "off";
       "editor.minimap.enabled" = false;
       "editor.renderWhitespace" = "selection";
       "editor.smoothScrolling" = true;
@@ -28,7 +28,7 @@
       "search.useIgnoreFiles" = true;
       "security.workspace.trust.untrustedFiles" = "open";
       "telemetry.telemetryLevel" = "off";
-      "terminal.integrated.enableMultiLinePasteWarning" = false;
+      "terminal.integrated.enableMultiLinePasteWarning" = "never";
       "window.autoDetectColorScheme" = true;
       "window.commandCenter" = true;
       "window.titleBarStyle" = "custom";
