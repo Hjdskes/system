@@ -10,6 +10,13 @@
       timonwong.shellcheck
     ];
     userSettings = {
+      # TODO: language-specific settings should go to language-specific modules
+      "calva.autoOpenInspector" = false;
+      "calva.evalOnSave" = true;
+      "calva.evaluationSendCodeToOutputWindow" = true;
+      "calva.useLegacyReplWindowPath" = false;
+      "calva.jackInEnv" = { "PATH" = "\${env:PATH}"; };
+      "calva.referencesCodeLens.enabled" = true;
       "editor.bracketPairColorization.enabled" = false;
       "editor.formatOnPaste" = true;
       "editor.formatOnSave" = true;
