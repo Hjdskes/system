@@ -18,7 +18,7 @@
     in flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
       in {
-        devShells.default = with pkgs; mkShellNoCC { packages = [ nil ]; };
+        devShells.default = with pkgs; mkShellNoCC { packages = [ ]; };
         checks = lib.mkHomeChecks system // lib.mkShellChecks system;
       }) // {
         homeModules = import ./home-manager/variants.nix inputs;

@@ -36,6 +36,8 @@
       gnused
       jq
       marksman
+      nil
+      nixpkgs-fmt
       nodePackages.bash-language-server
       nodePackages.vscode-json-languageserver
       spotify
