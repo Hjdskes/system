@@ -9,6 +9,8 @@
       github.github-vscode-theme
       timonwong.shellcheck
     ];
+    # See https://github.com/nix-community/home-manager/issues/5372.
+    mutableExtensionsDir = false;
     userSettings = {
       # TODO: language-specific settings should go to language-specific modules
       "calva.autoOpenInspector" = false;
