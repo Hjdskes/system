@@ -39,6 +39,7 @@
       "workbench.iconTheme" = "vs-seti";
       "workbench.tips.enabled" = false;
       "workbench.tree.indent" = 12;
+      "workbench.colorTheme" = "GitHub Light";
     };
   };
 }
