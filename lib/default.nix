@@ -1,4 +1,4 @@
-{ self, nixpkgs, ... }:
+{ self, nixpkgs, darwin, home-manager, ... }:
 with nixpkgs.lib; {
   mkHomeChecks = system:
     mapAttrs'
@@ -9,4 +9,15 @@ with nixpkgs.lib; {
   mkShellChecks = system:
     mapAttrs' (name: shell: nameValuePair "devshell.${name}" shell)
     (self.devShells."${system}" or { });
+
+  # TODO: is this really needed?
+  mkDarwinConfig =
+    { system ? "aarch64-darwin"
+    , baseModules ? [ ../modules/darwin home-manager.darwinModules.home-manager ]
+    , extraModules ? [ ]
+    }:
+    darwin.lib.darwinSystem {
+      inherit system;
+      modules = baseModules ++ extraModules;
+    };
 }

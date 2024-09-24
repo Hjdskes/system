@@ -11,9 +11,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, mac-app-util }@inputs:
+  outputs = { self, nixpkgs, flake-utils, home-manager, mac-app-util, darwin }@inputs:
     let lib = import ./lib inputs;
     in flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
@@ -21,7 +25,7 @@
         devShells.default = with pkgs; mkShellNoCC { packages = [ nil ]; };
         checks = lib.mkHomeChecks system // lib.mkShellChecks system;
       }) // {
-        homeModules = import ./home-manager/variants.nix inputs;
+        homeModules = import ./modules/home-manager/variants.nix inputs;
 
         homeConfigurations = {
           mac = home-manager.lib.homeManagerConfiguration {
@@ -32,6 +36,12 @@
           griffin = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
             modules = [ self.homeModules.griffin ];
+          };
+        };
+
+        darwinConfigurations = {
+          griffin = lib.mkDarwinConfig {
+            extraModules = [ { home-manager.users.jente = self.homeModules.griffin; } ];
           };
         };
       };
