@@ -10,7 +10,8 @@
     };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # TODO: my version of nixpkgs has a broken system-fare-quasiquote.
+      # inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
     treefmt-nix = {
