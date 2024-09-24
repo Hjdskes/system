@@ -1,4 +1,6 @@
 {
+  description = "My Nixified system configurations";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
