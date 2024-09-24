@@ -1,0 +1,19 @@
+name: "Branch build"
+
+on: [ push ]
+
+jobs:
+  check:
+    name: nix flake check
+    strategy:
+      matrix:
+        # TODO: add aarch64-darwin option when available.
+        os: [ "ubuntu-24.04" ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+      - name: Run nix flake check
+        run: nix flake check
