@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   programs.helix = {
     enable = true;
     settings = {
@@ -14,10 +14,5 @@
         lsp = { display-messages = true; };
       };
     };
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-    }];
   };
 }
